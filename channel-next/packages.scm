@@ -3,6 +3,7 @@
   #:use-module (guix download)
   #:use-module (guix gexp)
   #:use-module (guix git-download)
+  #:use-module (guix search-paths)
   #:use-module (guix utils)
   #:use-module (guix build-system trivial)
   #:use-module (guix build-system gnu)
