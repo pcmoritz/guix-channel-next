@@ -18,6 +18,7 @@
   #:use-module (gnu packages dbm)
   #:use-module (gnu packages libffi)
   #:use-module (gnu packages sqlite)
+  #:use-module (gnu packages tls)
   #:use-module (gnu packages xml))
 
 (define-public python-3.12-latest
