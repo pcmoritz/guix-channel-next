@@ -124,10 +124,9 @@ supported by the MyPy typechecker.")
                  "1msibi5cmi5znykkg66dq7xshl07lkqjxhrz5hcipqvlggsvjd4j"))))
      (build-system python-build-system)
      (native-inputs
-      (list unzip))
+      (list unzip
+	    python-setuptools))
      (arguments '(#:tests? #f))
-     (native-inputs
-      (list python-setuptools))
      (home-page "https://github.com/fonttools/fonttools")
      (synopsis "Tools to manipulate font files")
      (description
