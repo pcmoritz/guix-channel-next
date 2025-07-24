@@ -15,6 +15,7 @@
   #:use-module (gnu packages python-build)
   #:use-module (gnu packages python-web)
   #:use-module (gnu packages django)
+  #:use-module (gnu packages dbm)
   #:use-module (gnu packages xml))
 
 (define-public python-3.12
