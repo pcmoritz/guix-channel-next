@@ -86,6 +86,29 @@ files}, are written in a custom domain-specific language (@dfn{DSL}) that
 resembles Python.")
     (license license:asl2.0)))
 
+(define-public python-mypy-extensions-next
+  (package
+    (name "python-mypy-extensions-next")
+    (version "1.0.0")
+    (source (origin
+              (method url-fetch)
+              (uri (pypi-uri "mypy_extensions" version))
+              (sha256
+               (base32
+                "10h7mwjjfbwxzq7jzaj1pnv9g6laa1k0ckgw72j44160bnazinvm"))))
+    (build-system python-build-system)
+    (arguments
+     `(#:tests? #f)) ;no tests
+    (native-inputs
+     (list python-setuptools))
+    (home-page "https://github.com/python/mypy_extensions")
+    (synopsis "Experimental extensions for MyPy")
+    (description
+     "The @code{python-mypy-extensions} module defines
+experimental extensions to the standard @code{typing} module that are
+supported by the MyPy typechecker.")
+    (license license:expat)))
+
 (define-public python-iniconfig-next
   (package
     (name "python-iniconfig-next")
