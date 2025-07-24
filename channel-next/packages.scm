@@ -109,6 +109,41 @@ using the PLY parsing library.  It parses C code into an AST and can serve as
 a front-end for C compilers or analysis tools.")
     (license license:bsd-3)))
 
+(define-public mallard-ducktype-next
+  (package
+    (name "mallard-ducktype-next")
+    (version "1.0.2")
+    (source
+     (origin
+       (method git-fetch)
+       ;; git-reference because tests are not included in pypi source tarball                                                                                             
+       ;; https://issues.guix.gnu.org/issue/36755#2                                                                                                                       
+       (uri (git-reference
+             (url "https://github.com/projectmallard/mallard-ducktype")
+             (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "1jk9bfz7g04ip78s03b0xak6d54rj4h9zpgadkziy1ji216g6y4c"))))
+    (build-system python-build-system)
+    (arguments
+     '(#:phases
+       (modify-phases %standard-phases
+         (replace 'check
+           (lambda _
+             (with-directory-excursion "tests"
+               (invoke "sh" "runtests")))))))
+    (native-inputs
+     (list python-setuptools))
+    (home-page "http://projectmallard.org")
+    (synopsis "Convert Ducktype to Mallard documentation markup")
+    (description
+     "Ducktype is a lightweight syntax that can represent all the semantics                                                                                               
+of the Mallard XML documentation system.  Ducktype files can be converted to                                                                                              
+Mallard using the @command{ducktype} tool.  The yelp-tools package                                                                                                        
+provides additional functionality on the produced Mallard documents.")
+    (license license:expat)))
+
 (define-public python-django-next
   (package
     (inherit python-django-4.2)
