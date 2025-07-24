@@ -27,9 +27,9 @@
                 "02wi62k9w7716xxdgrrx68q89vaq3ncnbpw5ms0g27npn2df0mgr"))))
     (build-system python-build-system)
     (arguments
-     (list #:tests? #f                  ;disabled to avoid extra dependencies
-           #:phases
-           #~(modify-phases %standard-phases
+     '(#:tests? #f                  ;disabled to avoid extra dependencies
+       #:phases
+           (modify-phases %standard-phases
                ;; Meson calls the various executables in out/bin through the
                ;; Python interpreter, so we cannot use the shell wrapper.
                (replace 'wrap
