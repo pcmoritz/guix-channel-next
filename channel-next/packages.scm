@@ -109,6 +109,35 @@ experimental extensions to the standard @code{typing} module that are
 supported by the MyPy typechecker.")
     (license license:expat)))
 
+;;; Tests are left out in the main package to avoid cycles.
+;; XXX: When updating, solve comment in python-cu2qu.
+(define-public python-fonttools-minimal-next
+  (hidden-package
+   (package
+     (name "python-fonttools-minimal-next")
+     (version "4.39.3")
+     (source (origin
+               (method url-fetch)
+               (uri (pypi-uri "fonttools" version ".zip"))
+               (sha256
+                (base32
+                 "1msibi5cmi5znykkg66dq7xshl07lkqjxhrz5hcipqvlggsvjd4j"))))
+     (build-system python-build-system)
+     (native-inputs
+      (list unzip))
+     (arguments '(#:tests? #f))
+     (native-inputs
+      (list python-setuptools))
+     (home-page "https://github.com/fonttools/fonttools")
+     (synopsis "Tools to manipulate font files")
+     (description
+      "FontTools/TTX is a library to manipulate font files from Python.  It
+supports reading and writing of TrueType/OpenType fonts, reading and writing
+of AFM files, reading (and partially writing) of PS Type 1 fonts.  The package
+also contains a tool called “TTX” which converts TrueType/OpenType fonts to and
+from an XML-based format.")
+     (license license:expat))))
+
 (define-public python-iniconfig-next
   (package
     (name "python-iniconfig-next")
