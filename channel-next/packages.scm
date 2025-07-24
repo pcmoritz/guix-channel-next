@@ -36,9 +36,9 @@
                  (lambda* (#:key inputs outputs #:allow-other-keys)
                    (substitute* (search-input-file outputs "bin/meson")
                      (("# EASY-INSTALL-ENTRY-SCRIPT")
-                      (format #f "\                                                                                                                                                                                                        
+                      (format #f "\
 import sys                                                                                                                                                                                                                                 
-sys.path.insert(0, '~a')                                                                                                                                                                                                                   
+sys.path.insert(0, '~a')
 # EASY-INSTALL-ENTRY-SCRIPT" (site-packages inputs outputs)))))))))
     (inputs (list python ninja))
     (native-inputs
@@ -46,11 +46,11 @@ sys.path.insert(0, '~a')
     (home-page "https://mesonbuild.com/")
     (synopsis "Build system designed to be fast and user-friendly")
     (description
-     "The Meson build system is focused on user-friendliness and speed.                                                                                                                                                                    
-It can compile code written in C, C++, Fortran, Java, Rust, and other                                                                                                                                                                      
-languages.  Meson provides features comparable to those of the                                                                                                                                                                             
-Autoconf/Automake/make combo.  Build specifications, also known as @dfn{Meson                                                                                                                                                              
-files}, are written in a custom domain-specific language (@dfn{DSL}) that                                                                                                                                                                  
+     "The Meson build system is focused on user-friendliness and speed.
+It can compile code written in C, C++, Fortran, Java, Rust, and other
+languages.  Meson provides features comparable to those of the
+Autoconf/Automake/make combo.  Build specifications, also known as @dfn{Meson
+files}, are written in a custom domain-specific language (@dfn{DSL}) that
 resembles Python.")
     (license license:asl2.0)))
 
