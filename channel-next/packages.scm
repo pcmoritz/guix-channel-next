@@ -69,9 +69,10 @@ via commands such as @command{rst2man}, as well as supporting Python code.")
     ;; licensed under the PFSL, BSD 2-clause, and GPLv3+ licenses.
     (license (list license:public-domain license:psfl license:bsd-2 license:gpl3+))))
 
-(define-public python-django-5.2
+(define-public python-django-next
   (package
     (inherit python-django-4.2)
+    (name "python-django-next")
     (version "5.2.4")
     (source (origin
               (method url-fetch)
