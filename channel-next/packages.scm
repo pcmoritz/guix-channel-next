@@ -19,9 +19,9 @@
   #:use-module (gnu packages libffi)
   #:use-module (gnu packages xml))
 
-(define-public python-3.12
+(define-public python-3.12-latest
   (package
-    (name "python-next")
+    (name "python-latest")
     (version "3.12.2")
     (source
      (origin
