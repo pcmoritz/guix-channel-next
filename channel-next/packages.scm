@@ -69,6 +69,46 @@ via commands such as @command{rst2man}, as well as supporting Python code.")
     ;; licensed under the PFSL, BSD 2-clause, and GPLv3+ licenses.
     (license (list license:public-domain license:psfl license:bsd-2 license:gpl3+))))
 
+(define-public python-pycparser-next
+  (package
+    (name "python-pycparser-next")
+    (version "2.21")
+    (source
+     (origin
+      (method url-fetch)
+      (uri (pypi-uri "pycparser" version))
+      (sha256
+       (base32
+        "01kjlyn5w2nn2saj8w1rhq7v26328pd91xwgqn32z1zp2bngsi76"))))
+    (outputs '("out" "doc"))
+    (build-system python-build-system)
+    (arguments
+     `(#:phases
+       (modify-phases %standard-phases
+         (replace 'check
+           (lambda _
+             (invoke "python" "-m" "unittest" "discover")))
+         (add-after 'install 'install-doc
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let* ((data (string-append (assoc-ref outputs "doc") "/share"))
+                    (doc (string-append data "/doc/" ,name "-" ,version))
+                    (examples (string-append doc "/examples")))
+               (mkdir-p examples)
+               (for-each (lambda (file)
+                           (copy-file (string-append "." file)
+                                      (string-append doc file)))
+                         '("/README.rst" "/CHANGES" "/LICENSE"))
+               (copy-recursively "examples" examples)))))))
+    (native-inputs
+     (list python-setuptools))
+    (home-page "https://github.com/eliben/pycparser")
+    (synopsis "C parser in Python")
+    (description
+     "Pycparser is a complete parser of the C language, written in pure Python
+using the PLY parsing library.  It parses C code into an AST and can serve as
+a front-end for C compilers or analysis tools.")
+    (license license:bsd-3)))
+
 (define-public python-django-next
   (package
     (inherit python-django-4.2)
