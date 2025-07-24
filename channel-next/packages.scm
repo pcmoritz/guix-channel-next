@@ -13,6 +13,47 @@
   #:use-module (gnu packages python-web)
   #:use-module (gnu packages django))
 
+(define-public meson-next
+  (package
+    (name "meson-next")
+    (version "1.5.2")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append "https://github.com/mesonbuild/meson/"
+                                  "releases/download/" version  "/meson-"
+                                  version ".tar.gz"))
+              (sha256
+               (base32
+                "02wi62k9w7716xxdgrrx68q89vaq3ncnbpw5ms0g27npn2df0mgr"))))
+    (build-system python-build-system)
+    (arguments
+     (list #:tests? #f                  ;disabled to avoid extra dependencies                                                                                                                                                              
+           #:phases
+           #~(modify-phases %standard-phases
+               ;; Meson calls the various executables in out/bin through the                                                                                                                                                               
+               ;; Python interpreter, so we cannot use the shell wrapper.                                                                                                                                                                  
+               (replace 'wrap
+                 (lambda* (#:key inputs outputs #:allow-other-keys)
+                   (substitute* (search-input-file outputs "bin/meson")
+                     (("# EASY-INSTALL-ENTRY-SCRIPT")
+                      (format #f "\                                                                                                                                                                                                        
+import sys                                                                                                                                                                                                                                 
+sys.path.insert(0, '~a')                                                                                                                                                                                                                   
+# EASY-INSTALL-ENTRY-SCRIPT" (site-packages inputs outputs)))))))))
+    (inputs (list python ninja))
+    (native-inputs
+     (list python-setuptools))
+    (home-page "https://mesonbuild.com/")
+    (synopsis "Build system designed to be fast and user-friendly")
+    (description
+     "The Meson build system is focused on user-friendliness and speed.                                                                                                                                                                    
+It can compile code written in C, C++, Fortran, Java, Rust, and other                                                                                                                                                                      
+languages.  Meson provides features comparable to those of the                                                                                                                                                                             
+Autoconf/Automake/make combo.  Build specifications, also known as @dfn{Meson                                                                                                                                                              
+files}, are written in a custom domain-specific language (@dfn{DSL}) that                                                                                                                                                                  
+resembles Python.")
+    (license license:asl2.0)))
+
 (define-public python-pluggy-next
   (package
     (name "python-pluggy")
