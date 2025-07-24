@@ -135,6 +135,35 @@ resembles Python.")
 should be stored on various operating systems.")
     (license license:expat)))
 
+(define-public python-elementpath-next
+  (package
+    (name "python-elementpath-next")
+    (version "2.0.3")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "elementpath" version))
+       (sha256
+        (base32
+         "1kxx573ywqfh6j6aih2i6hhsya6kz79qq4bgz6yskwk6b18jyr8z"))))
+    (build-system python-build-system)
+    ;; The test suite is not run, to avoid a dependency cycle with
+    ;; python-xmlschema.
+    (arguments `(#:tests? #f))
+    (native-inputs
+     (list python-setuptools))
+    (home-page
+     "https://github.com/sissaschool/elementpath")
+    (synopsis
+     "XPath 1.0/2.0 parsers and selectors for ElementTree and lxml")
+    (description
+     "The proposal of this package is to provide XPath 1.0 and 2.0 selectors
+for Python's ElementTree XML data structures, both for the standard
+ElementTree library and for the @uref{http://lxml.de, lxml.etree} library.
+For lxml.etree this package can be useful for providing XPath 2.0 selectors,
+because lxml.etree already has its own implementation of XPath 1.0.")
+    (license license:expat)))
+
 (define-public python-pluggy-next
   (package
     (name "python-pluggy")
