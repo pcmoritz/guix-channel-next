@@ -14,6 +14,37 @@
   #:use-module (gnu packages python-web)
   #:use-module (gnu packages django))
 
+(define-public python-wheel-next
+  (package
+    (name "python-wheel-next")
+    (version "0.40.0")
+    (source
+      (origin
+        (method url-fetch)
+        (uri (pypi-uri "wheel" version))
+        (sha256
+         (base32
+          "0ww8fgkvwv35ypj4cnngczdwp6agr4qifvk2inb32azfzbrrc4fd"))))
+    (build-system python-build-system)
+    (arguments
+     ;; FIXME: The test suite runs "python setup.py bdist_wheel", which in turn
+     ;; fails to find the newly-built bdist_wheel library, even though it is
+     ;; available on PYTHONPATH.  What search path is consulted by setup.py?
+     '(#:tests? #f))
+    (native-inputs
+     (list python-setuptools))
+    (home-page "https://github.com/pypa/wheel")
+    (synopsis "Format for built Python packages")
+    (description
+     "A wheel is a ZIP-format archive with a specially formatted filename and
+the @code{.whl} extension.  It is designed to contain all the files for a PEP
+376 compatible install in a way that is very close to the on-disk format.  Many
+packages will be properly installed with only the @code{Unpack} step and the
+unpacked archive preserves enough information to @code{Spread} (copy data and
+scripts to their final locations) at any later time.  Wheel files can be
+installed with a newer @code{pip} or with wheel's own command line utility.")
+    (license license:expat)))
+
 (define-public meson-next
   (package
     (name "meson-next")
