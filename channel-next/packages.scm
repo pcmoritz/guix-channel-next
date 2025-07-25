@@ -750,6 +750,26 @@ Mallard using the @command{ducktype} tool.  The yelp-tools package
 provides additional functionality on the produced Mallard documents.")
     (license license:expat)))
 
+(define-public python-setuptools-next
+  (package
+    (inherit python-setuptools)
+    (name "python-setuptools")
+    (version "79.0.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "setuptools" version))
+       (sha256
+        (base32 "127svm8cdpvmq37gcrbvdr9fhrhs0nscnzh63gypjc1wyfwfg30j"))
+       (modules '((guix build utils)))
+       (snippet
+        #~(begin
+            (for-each delete-file
+                      (find-files "setuptools" "^(cli|gui).*\\.exe$"))))))
+    (arguments
+     `(#:python ,python-next-wrapper))
+    (build-system pyproject-build-system)))
+
 (define-public python-django-next
   (package
     (inherit python-django-4.2)
@@ -815,7 +835,7 @@ provides additional functionality on the produced Mallard documents.")
          (delete 'wrap))))
     (native-inputs
      (modify-inputs (package-native-inputs python-django-4.2)
-		    (append python-setuptools)))
+		    (append python-setuptools-next)))
     (propagated-inputs
      (modify-inputs (package-propagated-inputs python-django-4.2)
                     (append python-pluggy-next)))))
