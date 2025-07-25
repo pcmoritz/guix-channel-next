@@ -766,7 +766,7 @@ provides additional functionality on the produced Mallard documents.")
     ;; (native-inputs
     ;;  (list python-3.12-nocheck))
     (arguments
-     `(#:python "python-next"
+     `(#:python ,python-next
        #:test-flags
        (list
         ;; By default tests run in parallel, which may cause various race
