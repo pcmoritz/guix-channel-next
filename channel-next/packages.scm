@@ -815,7 +815,7 @@ provides additional functionality on the produced Mallard documents.")
          (delete 'wrap))))
     (native-inputs
      (modify-inputs (package-native-inputs python-django-4.2)
-		    (append python-setuptools-next)))
+		    (append python-setuptools)))
     (propagated-inputs
      (modify-inputs (package-propagated-inputs python-django-4.2)
                     (append python-pluggy-next)))))
