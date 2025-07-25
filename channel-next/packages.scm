@@ -766,7 +766,7 @@ provides additional functionality on the produced Mallard documents.")
     ;; (native-inputs
     ;;  (list python-3.12-nocheck))
     (arguments
-     `(#:python ,python-next
+     `(#:python ,(wrap-python3 python-next)
        #:test-flags
        (list
         ;; By default tests run in parallel, which may cause various race
@@ -813,9 +813,6 @@ provides additional functionality on the produced Mallard documents.")
          ;; PYTHONPATH, so just disable the wrapper to reduce the size from
          ;; ~710 MiB to ~203 MiB.
          (delete 'wrap))))
-    (native-inputs
-     (modify-inputs (package-native-inputs python-django-4.2)
-		    (append python-next)))
     (propagated-inputs
      (modify-inputs (package-propagated-inputs python-django-4.2)
                     (append python-setuptools-next)
