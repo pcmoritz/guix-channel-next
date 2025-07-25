@@ -630,7 +630,8 @@ because lxml.etree already has its own implementation of XPath 1.0.")
         (base32 "1wr2vnbb7gy9wlz01yvb7rn4iqzd3mwmidk11ywk7395fq5i7k3x"))))
     (build-system pyproject-build-system)
     (arguments
-     `(#:tests? #f))
+     `(#:tests? #f
+       #:python ,python-next-wrapper))
     (native-inputs
      (list python-setuptools-next
            python-setuptools-scm-next
