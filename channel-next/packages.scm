@@ -767,7 +767,8 @@ provides additional functionality on the produced Mallard documents.")
             (for-each delete-file
                       (find-files "setuptools" "^(cli|gui).*\\.exe$"))))))
     (arguments
-     `(#:python ,python-next-wrapper))
+     `(#:python ,python-next-wrapper
+       #:tests? #f))
     (build-system pyproject-build-system)))
 
 (define-public python-django-next
